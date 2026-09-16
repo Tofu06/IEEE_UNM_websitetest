@@ -217,35 +217,66 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const availableWidth = heroTitle.parentElement.clientWidth;
+        const container = heroTitle.parentElement;
 
-        let minSize = 18;
-        let maxSize = 52;
-
-        heroTitle.style.fontSize = `${maxSize}px`;
-
-        if (heroTitle.scrollWidth <= availableWidth) {
+        if (!container) {
             return;
         }
 
-        while (maxSize - minSize > 0.5) {
-            const midSize = (minSize + maxSize) / 2;
+        const availableWidth = container.clientWidth;
 
-            heroTitle.style.fontSize = `${midSize}px`;
+        let minSize = 16;
+        let maxSize = 52;
+
+        /*
+        * Reset the title before measuring.
+        */
+        heroTitle.style.fontSize = `${maxSize}px`;
+
+        /*
+        * Make sure the browser measures the full
+        * single-line width.
+        */
+        heroTitle.style.whiteSpace = "nowrap";
+
+        /*
+        * Find the largest font size that fits.
+        */
+        while (maxSize - minSize > 0.5) {
+            const testSize = (maxSize + minSize) / 2;
+
+            heroTitle.style.fontSize = `${testSize}px`;
 
             if (heroTitle.scrollWidth > availableWidth) {
-                maxSize = midSize;
+                maxSize = testSize;
             } else {
-                minSize = midSize;
+                minSize = testSize;
             }
         }
 
         heroTitle.style.fontSize = `${minSize}px`;
     }
 
-    fitHeroTitle();
 
+    /*
+    * Run after the page has fully loaded.
+    */
+    window.addEventListener("load", fitHeroTitle);
+
+
+    /*
+    * Run whenever the viewport changes size.
+    */
     window.addEventListener("resize", fitHeroTitle);
+
+
+    /*
+    * Also run shortly after loading because
+    * mobile browsers can change the viewport
+    * dimensions after the initial layout.
+    */
+    setTimeout(fitHeroTitle, 100);
+    setTimeout(fitHeroTitle, 500);
 
     /* =====================================================
     HERO TEXT ROTATION

@@ -708,7 +708,8 @@ body.dark-mode .contact-grid {
     position: relative;
     z-index: 1;
 
-    width: min(90%, 1200px);
+    width: 90%;
+    max-width: 1200px;
 
     display: flex;
     flex-direction: column;
@@ -718,23 +719,13 @@ body.dark-mode .contact-grid {
     text-align: center;
 }
 
-.hero-content h1 {
-    width: 100%;
-    white-space: nowrap;
-    text-align: center;
-
-    font-size: 52px;
-    letter-spacing: -2px;
-}
-
 /* Main title */
 
 .hero-content h1 {
     width: 100%;
+    max-width: 1200px;
 
     margin-bottom: 20px;
-
-    color: #ffffff;
 
     font-size: 52px;
     line-height: 1;
@@ -743,6 +734,8 @@ body.dark-mode .contact-grid {
     font-weight: 800;
 
     white-space: nowrap;
+
+    text-align: center;
 }
 
 /* Rotating discipline */
@@ -1849,12 +1842,6 @@ body.dark-mode .contact-grid {
 
     .hero {
         min-height: 600px;
-    }
-
-    .hero-content h1 {
-        font-size: 48px;
-
-        letter-spacing: -2px;
     }
 
     .hero-discipline {
