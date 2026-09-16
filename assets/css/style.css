@@ -190,6 +190,43 @@ img {
     line-height: 1.8;
 }
 
+/* =========================================================
+   HERO ROTATING TEXT
+   ========================================================= */
+
+.rotating-wrapper {
+    display: inline-block;
+
+    min-width: 4ch;
+
+    color: var(--primary-blue);
+
+    overflow: hidden;
+
+    vertical-align: bottom;
+}
+
+#rotatingText {
+    display: inline-block;
+
+    animation: textSlideIn 0.45s ease;
+}
+
+
+/* Text entering */
+
+@keyframes textSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .button-placeholder {
     min-width: 165px;
     min-height: 50px;

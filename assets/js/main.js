@@ -1,38 +1,82 @@
 document.addEventListener("DOMContentLoaded", () => {
+    /* =====================================================
+       MOBILE MENU
+       ===================================================== */
+
     const menuButton = document.getElementById("menuButton");
     const mainNav = document.getElementById("mainNav");
 
-    if (!menuButton || !mainNav) {
-        return;
+    if (menuButton && mainNav) {
+        menuButton.addEventListener("click", () => {
+            const isOpen = mainNav.classList.toggle("active");
+
+            menuButton.setAttribute(
+                "aria-label",
+                isOpen ? "Close menu" : "Open menu"
+            );
+
+            menuButton.innerHTML = isOpen ? "✕" : "☰";
+        });
+
+        mainNav.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+                mainNav.classList.remove("active");
+
+                menuButton.setAttribute(
+                    "aria-label",
+                    "Open menu"
+                );
+
+                menuButton.innerHTML = "☰";
+            });
+        });
+
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 900) {
+                mainNav.classList.remove("active");
+
+                menuButton.setAttribute(
+                    "aria-label",
+                    "Open menu"
+                );
+
+                menuButton.innerHTML = "☰";
+            }
+        });
     }
 
-    const closeMenu = () => {
-        mainNav.classList.remove("active");
-        menuButton.classList.remove("active");
-        menuButton.setAttribute("aria-expanded", "false");
-        menuButton.setAttribute("aria-label", "Open menu");
-        menuButton.innerHTML = "☰";
-    };
 
-    menuButton.addEventListener("click", () => {
-        const isOpen = mainNav.classList.toggle("active");
+    /* =====================================================
+       HERO TEXT ROTATION
+       ===================================================== */
 
-        menuButton.classList.toggle("active", isOpen);
-        menuButton.setAttribute("aria-expanded", String(isOpen));
-        menuButton.setAttribute(
-            "aria-label",
-            isOpen ? "Close menu" : "Open menu"
-        );
-        menuButton.innerHTML = isOpen ? "✕" : "☰";
-    });
+    const rotatingText = document.getElementById("rotatingText");
 
-    mainNav.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", closeMenu);
-    });
+    if (rotatingText) {
+        const words = [
+            "Electrical",
+            "Electronic",
+            "Mechatronic",
+            "Computer Science"
+        ];
 
-    window.addEventListener("resize", () => {
-        if (window.innerWidth > 900) {
-            closeMenu();
-        }
-    });
+        let currentIndex = 0;
+
+        setInterval(() => {
+            rotatingText.style.animation = "none";
+
+            // Force animation restart
+            void rotatingText.offsetWidth;
+
+            currentIndex =
+                (currentIndex + 1) % words.length;
+
+            rotatingText.textContent =
+                words[currentIndex];
+
+            rotatingText.style.animation =
+                "textSlideIn 0.45s ease";
+
+        }, 2500);
+    }
 });
