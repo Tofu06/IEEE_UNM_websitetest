@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+
     /* =====================================================
        MOBILE MENU
        ===================================================== */
@@ -47,12 +48,100 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
+   DARK MODE
+   ===================================================== */
+
+const themeToggle = document.getElementById("themeToggle");
+const themeIcon = document.getElementById("themeIcon");
+
+if (themeToggle) {
+
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+
+        themeToggle.setAttribute(
+            "aria-pressed",
+            "true"
+        );
+
+        if (themeIcon) {
+            themeIcon.textContent = "☀";
+        }
+    }
+
+        themeToggle.addEventListener("click", () => {
+        const isDark = document.body.classList.contains("dark-mode");
+
+        const rect = themeToggle.getBoundingClientRect();
+
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+
+        const overlay = document.createElement("div");
+
+        overlay.className = "theme-transition";
+
+        overlay.style.setProperty(
+            "--transition-x",
+            `${x}px`
+        );
+
+        overlay.style.setProperty(
+            "--transition-y",
+            `${y}px`
+        );
+
+        // Dark → Light = white
+        // Light → Dark = dark
+        overlay.style.background =
+            isDark ? "#ffffff" : "#101820";
+
+        document.body.appendChild(overlay);
+
+        requestAnimationFrame(() => {
+            overlay.classList.add("expand");
+        });
+
+        setTimeout(() => {
+            document.body.classList.toggle(
+                "dark-mode",
+                !isDark
+            );
+
+            localStorage.setItem(
+                "theme",
+                !isDark ? "dark" : "light"
+            );
+
+            themeToggle.setAttribute(
+                "aria-pressed",
+                !isDark ? "true" : "false"
+            );
+
+            if (themeIcon) {
+                themeIcon.textContent =
+                    !isDark ? "☀" : "☾";
+            }
+        }, 350);
+
+        setTimeout(() => {
+            overlay.remove();
+        }, 750);
+    });
+}
+
+
+    /* =====================================================
        HERO TEXT ROTATION
        ===================================================== */
 
-    const rotatingText = document.getElementById("rotatingText");
+    const rotatingText =
+        document.getElementById("rotatingText");
 
     if (rotatingText) {
+
         const words = [
             "Electrical",
             "Electronic",
@@ -63,9 +152,9 @@ document.addEventListener("DOMContentLoaded", () => {
         let currentIndex = 0;
 
         setInterval(() => {
+
             rotatingText.style.animation = "none";
 
-            // Force animation restart
             void rotatingText.offsetWidth;
 
             currentIndex =
@@ -79,4 +168,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }, 2500);
     }
+
 });

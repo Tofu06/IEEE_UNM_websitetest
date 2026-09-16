@@ -277,6 +277,262 @@ button {
     cursor: pointer;
 }
 
+/* -------------------------
+   Header Controls
+   ------------------------- */
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+/* -------------------------
+   Dark Mode Toggle
+   ------------------------- */
+
+.theme-toggle {
+    position: relative;
+
+    width: 50px;
+    height: 28px;
+
+    padding: 0;
+
+    border: 2px solid var(--primary-blue);
+    border-radius: 999px;
+
+    background: var(--white);
+
+    cursor: pointer;
+
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.theme-toggle::before {
+    content: "";
+
+    position: absolute;
+
+    top: 3px;
+    left: 3px;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    background: var(--primary-blue);
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+
+.theme-icon {
+    position: absolute;
+
+    top: 50%;
+    right: 5px;
+
+    transform: translateY(-50%);
+
+    color: var(--primary-blue);
+
+    font-size: 12px;
+
+    pointer-events: none;
+
+    transition:
+        color 0.3s ease,
+        opacity 0.3s ease;
+}
+
+
+/* Dark mode toggle state */
+
+body.dark-mode .theme-toggle {
+    background: #1b2938;
+    border-color: #5da9e9;
+}
+
+body.dark-mode .theme-toggle::before {
+    transform: translateX(21px);
+
+    background: #ffffff;
+}
+
+body.dark-mode .theme-icon {
+    left: 6px;
+    right: auto;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+body.dark-mode {
+    --black: #f1f5f9;
+    --dark-gray: #d5dde6;
+    --gray: #aeb9c5;
+
+    --white: #101820;
+
+    --light-gray: #18232d;
+    --very-light-blue: #111d29;
+    --border: #2d3b49;
+
+    background: #101820;
+    color: var(--black);
+}
+
+
+/* Header */
+
+body.dark-mode .site-header {
+    background: rgba(16, 24, 32, 0.95);
+
+    border-color: var(--border);
+}
+
+body.dark-mode .logo-placeholder {
+    color: #5da9e9;
+    border-color: #5da9e9;
+}
+
+body.dark-mode .main-nav a {
+    color: var(--dark-gray);
+}
+
+body.dark-mode .main-nav a:hover {
+    color: #5da9e9;
+}
+
+
+/* Hero */
+
+body.dark-mode .hero {
+    background:
+        linear-gradient(
+            135deg,
+            #003f7f 0%,
+            #00539f 55%,
+            #0b6dbb 100%
+        );
+}
+
+
+/* Sections */
+
+body.dark-mode .section:nth-child(even) {
+    background: #111d29;
+}
+
+
+/* Cards */
+
+body.dark-mode .text-block,
+body.dark-mode .activity-card,
+body.dark-mode .event-card,
+body.dark-mode .post-card,
+body.dark-mode .team-card,
+body.dark-mode .contact-card {
+    background: #16212b;
+
+    border-color: var(--border);
+}
+
+
+/* Image placeholders */
+
+body.dark-mode .hero-image,
+body.dark-mode .home-intro-image,
+body.dark-mode .team-image,
+body.dark-mode .event-image,
+body.dark-mode .post-image {
+    background: #1d2a36;
+
+    border-color: var(--border);
+}
+
+
+/* Light blue UI */
+
+body.dark-mode .icon-placeholder,
+body.dark-mode .post-category {
+    background: #142b43;
+
+    border-color: #244e73;
+
+    color: #6eb5ef;
+}
+
+
+/* Page header */
+
+body.dark-mode .page-header {
+    background:
+        linear-gradient(
+            135deg,
+            #101820,
+            #122335
+        );
+}
+
+
+/* Contact */
+
+body.dark-mode .contact-grid {
+    background:
+        linear-gradient(
+            135deg,
+            #004f95 0%,
+            #005fae 60%,
+            #0b72bf 100%
+        );
+}
+
+/* =========================================================
+   DARK MODE TRANSITION
+   ========================================================= */
+
+.theme-transition {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    z-index: 9999;
+
+    pointer-events: none;
+
+    clip-path: circle(
+        0% at var(--transition-x) var(--transition-y)
+    );
+
+    transition: clip-path 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-transition.expand {
+    clip-path: circle(
+        150% at var(--transition-x) var(--transition-y)
+    );
+}
+
+.theme-transition.contract {
+    clip-path: circle(
+        0% at var(--transition-x) var(--transition-y)
+    );
+}
 
 /* -------------------------
    Footer
@@ -1349,6 +1605,21 @@ button {
    ========================================================= */
 
 @media (max-width: 900px) {
+
+    .header-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .theme-toggle {
+        width: 48px;
+        height: 27px;
+    }
+
+    .menu-placeholder {
+        display: flex;
+    }
 
     .main-nav {
         position: absolute;
