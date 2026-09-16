@@ -499,6 +499,33 @@ body.dark-mode .contact-grid {
 }
 
 /* =========================================================
+   FIXED BLUE CTA
+   ========================================================= */
+
+.contact-grid {
+    color: #ffffff;
+}
+
+.contact-grid .eyebrow,
+.contact-grid h2 {
+    color: #ffffff;
+}
+
+.contact-grid p {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.contact-grid .button-placeholder {
+    background: #ffffff;
+    color: #0066cc;
+}
+
+.contact-grid .button-placeholder:hover {
+    background: #eaf4ff;
+    color: #004c99;
+}
+
+/* =========================================================
    DARK/LIGHT MODE TRANSITION
    ========================================================= */
 
