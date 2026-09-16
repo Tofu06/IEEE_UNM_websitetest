@@ -1,0 +1,51 @@
+---
+layout: default
+title: Events
+description: IEEE UNM events and activities archive.
+---
+
+<section class="page-header">
+    <div class="container">
+        <p class="eyebrow">IEEE UNM</p>
+        <h1>Events</h1>
+        <p>
+            A record of our workshops, talks, competitions and community events.
+        </p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        {% assign posts_by_year = site.posts | group_by_exp: 'post', 'post.date | date: "%Y"' %}
+        {% for year in posts_by_year %}
+        <div class="year-block">
+            <div class="year-title">
+                <p class="eyebrow">EVENT ARCHIVE</p>
+                <h2>{{ year.name }}</h2>
+            </div>
+
+            <div class="event-grid">
+                {% for post in year.items %}
+                <article class="event-card">
+                    <a href="{{ post.url | relative_url }}">
+                        <div class="event-image">
+                            {% if post.image %}
+                                <img src="{{ post.image | relative_url }}" alt="{{ post.title }}">
+                            {% else %}
+                                IMAGE
+                            {% endif %}
+                        </div>
+                        <div class="event-body">
+                            <span class="post-category">{{ post.category | default: "Event" }}</span>
+                            <h3>{{ post.title }}</h3>
+                            <p>{{ post.date | date: "%d %B %Y" }}</p>
+                            <span class="text-link">View Event →</span>
+                        </div>
+                    </a>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>

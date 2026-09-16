@@ -1,0 +1,44 @@
+---
+layout: default
+title: Updates
+description: Latest IEEE UNM activities, news and event updates.
+---
+
+<section class="page-header">
+    <div class="container">
+        <p class="eyebrow">IEEE UNM</p>
+        <h1>Latest Updates</h1>
+        <p>
+            Follow our latest activities, announcements, workshops and events.
+        </p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="post-grid">
+            {% assign posts = site.posts | sort: 'date' | reverse %}
+            {% for post in posts %}
+            <article class="post-card">
+                <a href="{{ post.url | relative_url }}">
+                    <div class="event-image">
+                        {% if post.image %}
+                            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}">
+                        {% else %}
+                            IMAGE
+                        {% endif %}
+                    </div>
+
+                    <div class="event-body">
+                        <span class="post-category">{{ post.category | default: "Update" }}</span>
+                        <h2>{{ post.title }}</h2>
+                        <p class="post-date">{{ post.date | date: "%d %B %Y" }}</p>
+                        <p>{{ post.excerpt | strip_html | truncate: 160 }}</p>
+                        <span class="text-link">Read More →</span>
+                    </div>
+                </a>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
