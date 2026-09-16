@@ -40,6 +40,12 @@
    Base
    ------------------------- */
 
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -720,6 +726,14 @@ body.dark-mode .contact-grid {
 }
 
 /* Main title */
+
+.hero-title-mobile {
+    display: none;
+}
+
+.hero-title-desktop {
+    display: inline;
+}
 
 .hero-content h1 {
     width: 100%;
@@ -1667,13 +1681,13 @@ body.dark-mode .contact-grid {
 
         top: 100%;
         left: 0;
+        right: 0;
 
-        width: 100vw;
+        width: 100%;
 
         display: flex;
 
         flex-direction: column;
-
         align-items: stretch;
 
         gap: 0;
@@ -1852,6 +1866,25 @@ body.dark-mode .contact-grid {
         font-size: 40px;
 
         letter-spacing: -2px;
+    }
+
+    .hero-title-desktop {
+        display: none;
+    }
+
+    .hero-title-mobile {
+        display: inline;
+    }
+
+    .hero-content h1 {
+        width: 100%;
+
+        font-size: 48px;
+        line-height: 1;
+
+        letter-spacing: -2px;
+
+        white-space: nowrap;
     }
 
     .hero-content p {
