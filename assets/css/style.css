@@ -727,29 +727,22 @@ body.dark-mode .contact-grid {
 
 /* Main title */
 
+.hero-title {
+    width: 100%;
+    margin-bottom: 20px;
+
+    text-align: center;
+
+    font-weight: 800;
+    line-height: 1;
+}
+
 .hero-title-mobile {
     display: none;
 }
 
 .hero-title-desktop {
     display: inline;
-}
-
-.hero-content h1 {
-    width: 100%;
-    max-width: 1200px;
-
-    margin-bottom: 20px;
-
-    font-size: 52px;
-    line-height: 1;
-
-    letter-spacing: -2px;
-    font-weight: 800;
-
-    white-space: nowrap;
-
-    text-align: center;
 }
 
 /* Rotating discipline */
@@ -1868,23 +1861,18 @@ body.dark-mode .contact-grid {
         letter-spacing: -2px;
     }
 
+    .hero-title {
+        font-size: 48px !important;
+        white-space: nowrap;
+        letter-spacing: -2px;
+    }
+
     .hero-title-desktop {
         display: none;
     }
 
     .hero-title-mobile {
         display: inline;
-    }
-
-    .hero-content h1 {
-        width: 100%;
-
-        font-size: 48px;
-        line-height: 1;
-
-        letter-spacing: -2px;
-
-        white-space: nowrap;
     }
 
     .hero-content p {
