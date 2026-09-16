@@ -499,7 +499,7 @@ body.dark-mode .contact-grid {
 }
 
 /* =========================================================
-   DARK MODE TRANSITION
+   DARK/LIGHT MODE TRANSITION
    ========================================================= */
 
 .theme-transition {
@@ -515,23 +515,32 @@ body.dark-mode .contact-grid {
 
     pointer-events: none;
 
+    background: var(--transition-color);
+
     clip-path: circle(
-        0% at var(--transition-x) var(--transition-y)
+        0px at var(--transition-x) var(--transition-y)
     );
 
-    transition: clip-path 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: none;
 }
 
 .theme-transition.expand {
     clip-path: circle(
-        150% at var(--transition-x) var(--transition-y)
+        var(--transition-radius)
+        at var(--transition-x) var(--transition-y)
     );
+
+    transition:
+        clip-path 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .theme-transition.contract {
     clip-path: circle(
-        0% at var(--transition-x) var(--transition-y)
+        0px at var(--transition-x) var(--transition-y)
     );
+
+    transition:
+        clip-path 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* -------------------------
@@ -627,7 +636,7 @@ body.dark-mode .contact-grid {
             #1680dc 100%
         );
 
-    color: var(--white);
+    color: #ffffff;
 }
 
 
@@ -672,12 +681,10 @@ body.dark-mode .contact-grid {
     position: relative;
     z-index: 1;
 
-    width: min(90%, 1000px);
+    width: min(90%, 1200px);
 
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
 
@@ -685,19 +692,31 @@ body.dark-mode .contact-grid {
 }
 
 .hero-content h1 {
-    margin-bottom: 20px;
+    width: 100%;
+    white-space: nowrap;
+    text-align: center;
 
-    color: var(--white);
-
-    font-size: clamp(50px, 8vw, 90px);
-
-    line-height: 1;
-
-    letter-spacing: -4px;
-
-    font-weight: 800;
+    font-size: 52px;
+    letter-spacing: -2px;
 }
 
+/* Main title */
+
+.hero-content h1 {
+    width: 100%;
+
+    margin-bottom: 20px;
+
+    color: #ffffff;
+
+    font-size: 52px;
+    line-height: 1;
+
+    letter-spacing: -2px;
+    font-weight: 800;
+
+    white-space: nowrap;
+}
 
 /* Rotating discipline */
 
@@ -716,7 +735,7 @@ body.dark-mode .contact-grid {
 #rotatingText {
     display: inline-block;
 
-    color: var(--white);
+    color: #ffffff;
 
     font-size: clamp(45px, 7vw, 80px);
 
@@ -725,6 +744,9 @@ body.dark-mode .contact-grid {
     letter-spacing: -3px;
 
     font-weight: 700;
+
+    text-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.15);
 
     animation: textSlideIn 0.45s ease;
 }
@@ -737,28 +759,29 @@ body.dark-mode .contact-grid {
 
     margin-bottom: 15px;
 
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.95);
 
     font-size: 19px;
-
     line-height: 1.8;
-}
 
+    text-shadow:
+        0 1px 8px rgba(0, 0, 0, 0.12);
+}
 
 /* Hero button */
 
 .hero .button-placeholder {
     margin-top: 25px;
 
-    background: var(--white);
-    color: var(--primary-blue);
+    background: #ffffff;
+    color: #0066cc;
 
     border: none;
 }
 
 .hero .button-placeholder:hover {
-    background: var(--light-blue);
-    color: var(--dark-blue);
+    background: #eaf4ff;
+    color: #004c99;
 }
 
 
@@ -769,13 +792,11 @@ body.dark-mode .contact-grid {
 @keyframes textSlideIn {
     from {
         opacity: 0;
-
         transform: translateY(100%);
     }
 
     to {
         opacity: 1;
-
         transform: translateY(0);
     }
 }

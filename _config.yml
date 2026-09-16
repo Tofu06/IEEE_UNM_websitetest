@@ -1,7 +1,7 @@
 title: IEEE UNM
 email: ''
 description: IEEE University of Nottingham Malaysia Student Branch
-url: ''
+url: "https://tofu06.github.io"
 baseurl: '/IEEE-UNM-website'
 markdown: kramdown
 permalink: /updates/:year/:month/:day/:title/
