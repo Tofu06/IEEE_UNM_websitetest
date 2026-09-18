@@ -242,3 +242,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+
+/* =====================================================
+   HEADER SCROLL EFFECT
+   ===================================================== */
+
+const siteHeader = document.querySelector(".site-header");
+
+if (siteHeader) {
+    const updateHeader = () => {
+        if (window.scrollY > 10) {
+            document.body.classList.add("header-scrolled");
+        } else {
+            document.body.classList.remove("header-scrolled");
+        }
+    };
+
+    updateHeader();
+
+    window.addEventListener(
+        "scroll",
+        updateHeader,
+        { passive: true }
+    );
+}

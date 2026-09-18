@@ -7,6 +7,8 @@
    ------------------------- */
 
 :root {
+    --header-height: 80px;
+    --header-height-scrolled: 76px;
     --primary-blue: #0066cc;
     --dark-blue: #004c99;
     --light-blue: #eaf4ff;
@@ -176,27 +178,39 @@ button {
    ------------------------- */
 
 .site-header {
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 1000;
+    left: 0;
 
     width: 100%;
+
+    z-index: 1000;
+
+    height: var(--header-height);
 
     background: rgba(255, 255, 255, 0.97);
 
     border-bottom: 1px solid var(--border);
 
     backdrop-filter: blur(10px);
+
+    transition:
+        height 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease;
 }
 
 .header-inner {
     position: relative;
 
-    min-height: 80px;
+    height: var(--header-height);
 
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    transition:
+        height 0.3s ease;
 }
 
 .logo-placeholder {
@@ -214,13 +228,21 @@ button {
 
     font-size: 14px;
     font-weight: 800;
+
+    flex-shrink: 0;
 }
 
 .main-nav {
+    position: absolute;
+
+    left: 50%;
+
     display: flex;
     align-items: center;
 
     gap: 32px;
+
+    transform: translateX(-50%);
 }
 
 .main-nav a {
@@ -232,6 +254,8 @@ button {
 
     font-size: 14px;
     font-weight: 600;
+
+    white-space: nowrap;
 
     transition: color 0.2s ease;
 }
@@ -290,9 +314,39 @@ button {
 .header-controls {
     display: flex;
     align-items: center;
+    justify-content: center;
+
     gap: 12px;
+
+    flex-shrink: 0;
 }
 
+/* =========================================================
+   HEADER — SCROLLED STATE
+   ========================================================= */
+
+body.header-scrolled {
+    --header-height: 76px;
+}
+
+body.header-scrolled .site-header {
+    height: var(--header-height);
+}
+
+body.header-scrolled .header-inner {
+    height: var(--header-height);
+}
+
+main {
+    padding-top: 80px;
+
+    transition:
+        padding-top 0.3s ease;
+}
+
+body.header-scrolled main {
+    padding-top: 76px;
+}
 
 /* -------------------------
    Dark Mode Toggle
@@ -303,6 +357,10 @@ button {
 
     width: 50px;
     height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     padding: 0;
 
@@ -1669,6 +1727,14 @@ body.dark-mode .contact-grid {
         display: flex;
     }
 
+    .site-header {
+        height: 80px;
+    }
+
+    .header-inner {
+        height: 80px;
+    }
+
     .main-nav {
         position: absolute;
 
@@ -1687,6 +1753,8 @@ body.dark-mode .contact-grid {
 
         padding: 0;
 
+        transform: translateY(-10px);
+
         background: var(--white);
 
         border-top: 1px solid var(--border);
@@ -1700,8 +1768,6 @@ body.dark-mode .contact-grid {
         overflow: hidden;
 
         opacity: 0;
-
-        transform: translateY(-10px);
 
         pointer-events: none;
 
@@ -1737,18 +1803,29 @@ body.dark-mode .contact-grid {
         border-bottom: none;
     }
 
-    .main-nav a:hover {
-        background: var(--light-blue);
-
-        color: var(--primary-blue);
-    }
-
     .main-nav a::after {
         display: none;
     }
 
     .menu-placeholder {
         display: flex;
+    }
+
+    .header-controls {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 10px;
+    }
+
+    main {
+        padding-top: 80px;
+    }
+
+    body.header-scrolled main {
+        padding-top: 76px;
     }
 
 
