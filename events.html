@@ -16,36 +16,85 @@ permalink: /events.html
 
 <section class="section">
     <div class="container">
-        {% assign posts_by_year = site.posts | group_by_exp: 'post', 'post.date | date: "%Y"' %}
+
+        {% assign event_posts = site.posts
+            | where_exp: "post", "post.category == 'Event' or post.category == 'Workshop'"
+            | sort: "date"
+            | reverse
+        %}
+
+        {% assign posts_by_year = event_posts
+            | group_by_exp: "post", "post.date | date: '%Y'"
+        %}
+
         {% for year in posts_by_year %}
-        <div class="year-block">
-            <div class="year-title">
-                <p class="eyebrow">EVENT ARCHIVE</p>
-                <h2>{{ year.name }}</h2>
+
+            <div class="year-block">
+
+                <div class="year-title">
+                    <p class="eyebrow">EVENT ARCHIVE</p>
+
+                    <h2>{{ year.name }}</h2>
+                </div>
+
+
+                <div class="event-grid">
+
+                    {% for post in year.items %}
+
+                        <article class="event-card">
+
+                            <a href="{{ post.url | relative_url }}">
+
+                                <div class="event-image">
+
+                                    {% if post.image %}
+
+                                        <img
+                                            src="{{ post.image | relative_url }}"
+                                            alt="{{ post.title }}"
+                                        >
+
+                                    {% else %}
+
+                                        IMAGE
+
+                                    {% endif %}
+
+                                </div>
+
+
+                                <div class="event-body">
+
+                                    <span class="post-category">
+                                        {{ post.category }}
+                                    </span>
+
+                                    <h3>
+                                        {{ post.title }}
+                                    </h3>
+
+                                    <p>
+                                        {{ post.date | date: "%d %B %Y" }}
+                                    </p>
+
+                                    <span class="text-link">
+                                        View Event →
+                                    </span>
+
+                                </div>
+
+                            </a>
+
+                        </article>
+
+                    {% endfor %}
+
+                </div>
+
             </div>
 
-            <div class="event-grid">
-                {% for post in year.items %}
-                <article class="event-card">
-                    <a href="{{ post.url | relative_url }}">
-                        <div class="event-image">
-                            {% if post.image %}
-                                <img src="{{ post.image | relative_url }}" alt="{{ post.title }}">
-                            {% else %}
-                                IMAGE
-                            {% endif %}
-                        </div>
-                        <div class="event-body">
-                            <span class="post-category">{{ post.category | default: "Event" }}</span>
-                            <h3>{{ post.title }}</h3>
-                            <p>{{ post.date | date: "%d %B %Y" }}</p>
-                            <span class="text-link">View Event →</span>
-                        </div>
-                    </a>
-                </article>
-                {% endfor %}
-            </div>
-        </div>
         {% endfor %}
+
     </div>
 </section>
