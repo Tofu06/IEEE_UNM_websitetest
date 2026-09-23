@@ -1,5 +1,5 @@
 ---
-name: "Wong Jing Hang"
+name: "Gan Ching Kang"
 title: "Technical Executive"
 team: "Technical Team"
 image: "images/committee/profile_picture_placeholder.svg"

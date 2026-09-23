@@ -182,7 +182,7 @@ permalink: /about.html
             <h2>OUR COMMUNITY</h2>
         </div>
 
-        {% assign committee_groups = site.committees | group_by: "team" %}
+        {% assign team_order = "Executive Committee,Events Team,Technical Team,Marketing Team" | split: "," %}
 
         <div
             class="committee-tabs"
@@ -190,16 +190,24 @@ permalink: /about.html
             aria-label="Committee teams"
         >
 
-            {% for group in committee_groups %}
-                <button
-                    class="committee-tab{% if forloop.first %} active{% endif %}"
-                    type="button"
-                    role="tab"
-                    data-team="{{ group.name | slugify }}"
-                    aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-                >
-                    {{ group.name }}
-                </button>
+            {% for team_name in team_order %}
+
+                {% assign team_members = site.committees | where: "team", team_name %}
+
+                {% if team_members.size > 0 %}
+
+                    <button
+                        class="committee-tab{% if forloop.first %} active{% endif %}"
+                        type="button"
+                        role="tab"
+                        data-team="{{ team_name | slugify }}"
+                        aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                    >
+                        {{ team_name }}
+                    </button>
+
+                {% endif %}
+
             {% endfor %}
 
         </div>
@@ -207,55 +215,62 @@ permalink: /about.html
 
         <div class="committee-panels">
 
-            {% for group in committee_groups %}
+            {% for team_name in team_order %}
 
-                {% assign members = group.items | sort: "order" %}
+                {% assign members = site.committees
+                    | where: "team", team_name
+                    | sort: "order"
+                %}
 
-                <div
-                    class="committee-panel{% if forloop.first %} active{% endif %}"
-                    data-team="{{ group.name | slugify }}"
-                    role="tabpanel"
-                >
+                {% if members.size > 0 %}
 
-                    <div class="committee-grid">
+                    <div
+                        class="committee-panel{% if forloop.first %} active{% endif %}"
+                        data-team="{{ team_name | slugify }}"
+                        role="tabpanel"
+                    >
 
-                        {% for member in members %}
+                        <div class="committee-grid">
 
-                            <article class="profile-card">
+                            {% for member in members %}
 
-                                <div class="profile-image">
+                                <article class="profile-card">
 
-                                    {% if member.image %}
-                                        <img
-                                            src="{{ member.image | relative_url }}"
-                                            alt="{{ member.name }}"
-                                            loading="lazy"
-                                        >
-                                    {% else %}
-                                        <span>IMAGE</span>
-                                    {% endif %}
+                                    <div class="profile-image">
 
-                                </div>
+                                        {% if member.image %}
+                                            <img
+                                                src="{{ member.image | relative_url }}"
+                                                alt="{{ member.name }}"
+                                                loading="lazy"
+                                            >
+                                        {% else %}
+                                            <span>IMAGE</span>
+                                        {% endif %}
 
-                                <div class="profile-content">
+                                    </div>
 
-                                    <h3>
-                                        {{ member.name }}
-                                    </h3>
+                                    <div class="profile-content">
 
-                                    <p>
-                                        {{ member.title }}
-                                    </p>
+                                        <h3>
+                                            {{ member.name }}
+                                        </h3>
 
-                                </div>
+                                        <p>
+                                            {{ member.title }}
+                                        </p>
 
-                            </article>
+                                    </div>
 
-                        {% endfor %}
+                                </article>
+
+                            {% endfor %}
+
+                        </div>
 
                     </div>
 
-                </div>
+                {% endif %}
 
             {% endfor %}
 
