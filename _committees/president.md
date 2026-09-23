@@ -1,5 +1,5 @@
 ---
-name: "John Tan"
+name: "Marcus Wong"
 title: "President"
 team: "Executive Committee"
 image: " "

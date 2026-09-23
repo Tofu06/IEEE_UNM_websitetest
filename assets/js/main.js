@@ -266,3 +266,71 @@ if (siteHeader) {
         { passive: true }
     );
 }
+
+/* =====================================================
+   COMMITTEE TABS
+   ===================================================== */
+
+const committeeTabs =
+    document.querySelectorAll(".committee-tab");
+
+const committeePanels =
+    document.querySelectorAll(".committee-panel");
+
+if (
+    committeeTabs.length > 0 &&
+    committeePanels.length > 0
+) {
+
+    committeeTabs.forEach((tab) => {
+
+        tab.addEventListener("click", () => {
+
+            const selectedTeam =
+                tab.dataset.team;
+
+
+            /* -------------------------
+               Update active tab
+               ------------------------- */
+
+            committeeTabs.forEach((item) => {
+
+                const isActive =
+                    item === tab;
+
+                item.classList.toggle(
+                    "active",
+                    isActive
+                );
+
+                item.setAttribute(
+                    "aria-selected",
+                    isActive
+                        ? "true"
+                        : "false"
+                );
+            });
+
+
+            /* -------------------------
+               Update active panel
+               ------------------------- */
+
+            committeePanels.forEach((panel) => {
+
+                const isActive =
+                    panel.dataset.team === selectedTeam;
+
+                panel.classList.toggle(
+                    "active",
+                    isActive
+                );
+
+            });
+
+        });
+
+    });
+
+}
