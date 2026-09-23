@@ -7,18 +7,30 @@ permalink: /events.html
 <section class="page-header">
     <div class="container">
         <p class="eyebrow">IEEE UNM - SB</p>
+
         <h1>Events</h1>
+
         <p>
-            A record of our workshops, talks, competitions and community events.
+            A record of our workshops, talks, competitions and
+            community events.
         </p>
     </div>
 </section>
+
 
 <section class="section">
     <div class="container">
 
         {% assign event_posts = site.posts
-            | where_exp: "post", "post.category == 'Event' or post.category == 'Workshop'"
+            | where: "category", "Event"
+        %}
+
+        {% assign workshop_posts = site.posts
+            | where: "category", "Workshop"
+        %}
+
+        {% assign event_posts = event_posts
+            | concat: workshop_posts
             | sort: "date"
             | reverse
         %}
@@ -26,6 +38,7 @@ permalink: /events.html
         {% assign posts_by_year = event_posts
             | group_by_exp: "post", "post.date | date: '%Y'"
         %}
+
 
         {% for year in posts_by_year %}
 
