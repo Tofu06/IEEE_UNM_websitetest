@@ -1028,6 +1028,104 @@ body.header-scrolled {
    UPDATES
    ========================================================= */
 
+/* -------------------------
+   Filters
+   ------------------------- */
+.updates-filters {
+    display: grid;
+    grid-template-columns: minmax(220px, 2fr) 1fr 1fr auto;
+    gap: 15px;
+    align-items: end;
+    margin-bottom: 35px;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.filter-group label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.filter-group input,
+.filter-group select {
+    width: 100%;
+    height: 42px;
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg);
+    color: var(--text);
+    font: inherit;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+    outline: 2px solid #0066cc;
+    outline-offset: 1px;
+}
+
+.filter-clear button {
+    height: 42px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 6px;
+    background: #0066cc;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.filter-clear button:hover {
+    background: #004c99;
+}
+
+.no-results {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--muted);
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+    .updates-filters {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .search-group {
+        grid-column: 1 / -1;
+    }
+
+    .filter-clear {
+        grid-column: 1 / -1;
+    }
+
+    .filter-clear button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    .updates-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .search-group,
+    .filter-clear {
+        grid-column: auto;
+    }
+}
+/* -------------------------
+   Posts
+   ------------------------- */
+
 .post-grid {
     display: grid;
 

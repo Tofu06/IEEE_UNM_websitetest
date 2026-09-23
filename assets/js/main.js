@@ -334,3 +334,131 @@ if (
     });
 
 }
+
+/* =========================
+   Updates Search & Filters
+   ========================= */
+
+const updateSearch = document.getElementById("updateSearch");
+const academicYearFilter = document.getElementById("academicYearFilter");
+const typeFilter = document.getElementById("typeFilter");
+const clearFilters = document.getElementById("clearFilters");
+
+const updateCards = document.querySelectorAll(".update-card");
+const noResults = document.getElementById("noResults");
+
+if (
+    updateSearch &&
+    academicYearFilter &&
+    typeFilter &&
+    clearFilters &&
+    updateCards.length
+) {
+    const academicYears = new Set();
+    const types = new Set();
+
+    /* Collect filter values from posts */
+    updateCards.forEach(card => {
+        const academicYear = card.dataset.academicYear;
+        const type = card.dataset.type;
+
+        if (academicYear) {
+            academicYears.add(academicYear);
+        }
+
+        if (type) {
+            types.add(type);
+        }
+    });
+
+    /* Populate Academic Year dropdown */
+    [...academicYears]
+        .sort()
+        .reverse()
+        .forEach(year => {
+            const option = document.createElement("option");
+
+            option.value = year;
+            option.textContent = year;
+
+            academicYearFilter.appendChild(option);
+        });
+
+    /* Populate Type dropdown */
+    [...types]
+        .sort()
+        .forEach(type => {
+            const option = document.createElement("option");
+
+            option.value = type;
+            option.textContent =
+                type.charAt(0).toUpperCase() + type.slice(1);
+
+            typeFilter.appendChild(option);
+        });
+
+    /* Apply filters */
+    function filterUpdates() {
+        const searchTerm = updateSearch.value
+            .trim()
+            .toLowerCase();
+
+        const selectedYear = academicYearFilter.value;
+        const selectedType = typeFilter.value;
+
+        let visibleCount = 0;
+
+        updateCards.forEach(card => {
+            const title = card.dataset.title || "";
+            const academicYear = card.dataset.academicYear || "";
+            const type = card.dataset.type || "";
+
+            const matchesSearch =
+                title.includes(searchTerm);
+
+            const matchesYear =
+                selectedYear === "all" ||
+                academicYear === selectedYear;
+
+            const matchesType =
+                selectedType === "all" ||
+                type === selectedType;
+
+            if (
+                matchesSearch &&
+                matchesYear &&
+                matchesType
+            ) {
+                card.style.display = "";
+                visibleCount++;
+            } else {
+                card.style.display = "none";
+            }
+        });
+
+        /* Show / hide no-results message */
+        noResults.style.display =
+            visibleCount === 0 ? "block" : "none";
+    }
+
+    /* Events */
+    updateSearch.addEventListener("input", filterUpdates);
+
+    academicYearFilter.addEventListener(
+        "change",
+        filterUpdates
+    );
+
+    typeFilter.addEventListener(
+        "change",
+        filterUpdates
+    );
+
+    clearFilters.addEventListener("click", () => {
+        updateSearch.value = "";
+        academicYearFilter.value = "all";
+        typeFilter.value = "all";
+
+        filterUpdates();
+    });
+}
