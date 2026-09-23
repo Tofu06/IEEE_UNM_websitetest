@@ -14,15 +14,31 @@ permalink: /updates.html
     </div>
 </section>
 
-<section class="updates-section">
+<section class="page-header">
+    <div class="container">
+        <p class="eyebrow">IEEE UNM</p>
+
+        <h1>Latest Updates</h1>
+
+        <p>
+            Follow our latest activities, announcements, workshops and events.
+        </p>
+    </div>
+</section>
+
+
+<section class="section">
     <div class="container">
 
-        <!-- Filters -->
+        <!-- =========================
+             FILTERS
+             ========================= -->
+
         <div class="updates-filters">
 
-            <!-- Search -->
             <div class="filter-group search-group">
                 <label for="updateSearch">Search</label>
+
                 <input
                     type="text"
                     id="updateSearch"
@@ -31,50 +47,86 @@ permalink: /updates.html
                 >
             </div>
 
-            <!-- Academic Year -->
+
             <div class="filter-group">
-                <label for="academicYearFilter">Academic Year</label>
+                <label for="academicYearFilter">
+                    Academic Year
+                </label>
+
                 <select id="academicYearFilter">
                     <option value="all">All Years</option>
                 </select>
             </div>
 
-            <!-- Type -->
+
             <div class="filter-group">
-                <label for="typeFilter">Type</label>
+                <label for="typeFilter">
+                    Type
+                </label>
+
                 <select id="typeFilter">
                     <option value="all">All Types</option>
                 </select>
             </div>
 
-            <!-- Clear -->
+
             <div class="filter-group filter-clear">
-                <button id="clearFilters" type="button">
+                <button
+                    id="clearFilters"
+                    type="button"
+                >
                     Clear Filters
                 </button>
             </div>
 
         </div>
 
-        <!-- Posts -->
+
+        <!-- =========================
+             POSTS
+             ========================= -->
+
         <div class="post-grid" id="updatesGrid">
 
-            {% for post in site.posts %}
+            {% assign posts = site.posts | sort: 'date' | reverse %}
+
+            {% for post in posts %}
 
                 {% assign post_year = post.date | date: "%Y" %}
                 {% assign post_month = post.date | date: "%m" | plus: 0 %}
 
                 {% if post.academic_year %}
+
                     {% assign academic_year = post.academic_year %}
+
                 {% elsif post_month >= 9 %}
+
                     {% assign next_year = post_year | plus: 1 %}
-                    {% assign academic_year = post_year | append: "-" | append: next_year %}
+
+                    {% assign academic_year =
+                        post_year
+                        | append: "-"
+                        | append: next_year
+                    %}
+
                 {% else %}
+
                     {% assign previous_year = post_year | minus: 1 %}
-                    {% assign academic_year = previous_year | append: "-" | append: post_year %}
+
+                    {% assign academic_year =
+                        previous_year
+                        | append: "-"
+                        | append: post_year
+                    %}
+
                 {% endif %}
 
-                {% assign post_type = post.type | default: post.category | default: "Update" %}
+
+                {% assign post_type =
+                    post.category
+                    | default: "Update"
+                %}
+
 
                 <article
                     class="post-card update-card"
@@ -83,53 +135,73 @@ permalink: /updates.html
                     data-type="{{ post_type | downcase | escape }}"
                 >
 
-                    {% if post.image %}
-                        <a href="{{ post.url | relative_url }}" class="post-card-image">
-                            <img
-                                src="{{ post.image | relative_url }}"
-                                alt="{{ post.title }}"
-                            >
-                        </a>
-                    {% endif %}
+                    <a href="{{ post.url | relative_url }}">
 
-                    <div class="post-card-content">
+                        <div class="event-image">
 
-                        <span class="post-card-type">
-                            {{ post_type }}
-                        </span>
+                            {% if post.image %}
 
-                        <h2>
-                            <a href="{{ post.url | relative_url }}">
+                                <img
+                                    src="{{ post.image | relative_url }}"
+                                    alt="{{ post.title }}"
+                                >
+
+                            {% else %}
+
+                                IMAGE
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="event-body">
+
+                            <span class="post-category">
+                                {{ post_type }}
+                            </span>
+
+
+                            <h2>
                                 {{ post.title }}
-                            </a>
-                        </h2>
+                            </h2>
 
-                        <p class="post-card-date">
-                            {{ post.date | date: "%d %B %Y" }}
-                        </p>
 
-                        {% if post.excerpt %}
-                            <p>
-                                {{ post.excerpt | strip_html | truncatewords: 30 }}
+                            <p class="post-date">
+                                {{ post.date | date: "%d %B %Y" }}
                             </p>
-                        {% endif %}
 
-                        <a
-                            href="{{ post.url | relative_url }}"
-                            class="read-more"
-                        >
-                            Read More
-                        </a>
 
-                    </div>
+                            <p>
+                                {{ post.excerpt
+                                    | strip_html
+                                    | truncate: 160
+                                }}
+                            </p>
+
+
+                            <span class="text-link">
+                                Read More →
+                            </span>
+
+                        </div>
+
+                    </a>
+
                 </article>
 
             {% endfor %}
 
         </div>
 
+
         <!-- No results -->
-        <p id="noResults" class="no-results" style="display:none;">
+
+        <p
+            id="noResults"
+            class="no-results"
+            style="display: none;"
+        >
             No updates found.
         </p>
 
