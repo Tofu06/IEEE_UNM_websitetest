@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Bunkasai 2026 Registration Now Open"
+title: "Junior Committee Registration Now Open"
 date: 2026-09-17 09:00:00 +0800
 category: Announcement
 image: /images/placeholder.svg
 ---
 
-Registration for Bunkasai 2026 is now open.
+Registration for junior committee is now open.
 
 ## Event Information
 
