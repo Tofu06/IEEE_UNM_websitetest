@@ -22,3 +22,6 @@ exclude:
   - Gemfile.lock
   - README.md
   - vendor
+collections:
+  committees:
+    output: false
