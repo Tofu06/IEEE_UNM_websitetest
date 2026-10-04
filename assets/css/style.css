@@ -496,20 +496,16 @@ body.header-scrolled {
 
 .event-banner {
     position: relative;
+
     width: 100%;
 
     overflow: hidden;
 
-    background: #005eb8;
+    background: #005bb5;
     color: #ffffff;
 
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
-
-
-/* -------------------------
-   Banner link
-   ------------------------- */
 
 .event-banner-link {
     display: block;
@@ -523,25 +519,15 @@ body.header-scrolled {
     text-decoration: none;
 }
 
-
-/* -------------------------
-   Scrolling track
-   ------------------------- */
-
 .event-banner-track {
     display: flex;
 
     width: max-content;
 
-    animation: event-banner-scroll 24s linear infinite;
+    animation: event-banner-scroll 22s linear infinite;
 
     will-change: transform;
 }
-
-
-/* -------------------------
-   Individual repeated group
-   ------------------------- */
 
 .event-banner-group {
     flex-shrink: 0;
@@ -561,11 +547,6 @@ body.header-scrolled {
     letter-spacing: 0.3px;
 }
 
-
-/* -------------------------
-   "Upcoming Event" label
-   ------------------------- */
-
 .event-banner-label {
     font-size: 11px;
 
@@ -576,41 +557,21 @@ body.header-scrolled {
     text-transform: uppercase;
 }
 
-
-/* -------------------------
-   Separator
-   ------------------------- */
-
 .event-banner-separator {
     opacity: 0.65;
 
     font-size: 16px;
 }
 
-
-/* -------------------------
-   Event title
-   ------------------------- */
-
 .event-banner-title {
     font-weight: 700;
 }
-
-
-/* -------------------------
-   Date
-   ------------------------- */
 
 .event-banner-date {
     font-weight: 500;
 
     opacity: 0.9;
 }
-
-
-/* -------------------------
-   Arrow
-   ------------------------- */
 
 .event-banner-arrow {
     display: inline-block;
@@ -622,11 +583,6 @@ body.header-scrolled {
     transition: transform 0.2s ease;
 }
 
-
-/* -------------------------
-   Hover
-   ------------------------- */
-
 .event-banner-link:hover {
     color: #ffffff;
 }
@@ -634,11 +590,6 @@ body.header-scrolled {
 .event-banner-link:hover .event-banner-arrow {
     transform: translateX(4px);
 }
-
-
-/* -------------------------
-   Scrolling animation
-   ------------------------- */
 
 @keyframes event-banner-scroll {
 
@@ -651,11 +602,6 @@ body.header-scrolled {
     }
 
 }
-
-
-/* -------------------------
-   Pause on hover
-   ------------------------- */
 
 .event-banner:hover .event-banner-track {
     animation-play-state: paused;
@@ -676,22 +622,20 @@ body.header-scrolled {
         font-size: 13px;
     }
 
-
     .event-banner-label {
         font-size: 10px;
     }
 
-
     .event-banner-separator {
         font-size: 14px;
     }
-
 
     .event-banner-arrow {
         font-size: 16px;
     }
 
 }
+
 
 /* =========================================================
    REDUCED MOTION

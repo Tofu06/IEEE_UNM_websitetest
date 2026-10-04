@@ -7,12 +7,16 @@ description: IEEE University of Nottingham Malaysia Student Branch.
 {%- comment -%}
 =========================================================
 UPCOMING EVENT
+=========================================================
 
-Find the nearest future Event or Workshop marked:
-upcoming: true
+The banner looks for posts with:
 
-The banner automatically disappears when there is
-no qualifying upcoming event.
+    upcoming: true
+
+It only considers Event and Workshop posts.
+
+The nearest future event will be displayed.
+If there is no upcoming event, the banner is hidden.
 =========================================================
 {%- endcomment -%}
 
@@ -23,18 +27,15 @@ no qualifying upcoming event.
 
 {% assign upcoming_event = nil %}
 
-{% for post in upcoming_posts %}
+{% for candidate in upcoming_posts %}
 
-    {% if post.date > site.time %}
+    {% if candidate.date > site.time %}
 
-        {% assign is_event = false %}
+        {% if candidate.category == "Event" or candidate.category == "Workshop" %}
 
-        {% if post.category == "Event" or post.category == "Workshop" %}
-            {% assign is_event = true %}
-        {% endif %}
+            {% assign upcoming_event = candidate %}
+            {% break %}
 
-        {% if is_event and upcoming_event == nil %}
-            {% assign upcoming_event = post %}
         {% endif %}
 
     {% endif %}
@@ -89,7 +90,7 @@ UPCOMING EVENT BANNER
             </div>
 
 
-            <!-- Second copy for seamless looping -->
+            <!-- Second copy -->
             <div
                 class="event-banner-group"
                 aria-hidden="true"
@@ -154,9 +155,11 @@ HERO
 
 
         <div class="hero-discipline">
+
             <span id="rotatingText">
                 Electrical
             </span>
+
         </div>
 
 
@@ -364,7 +367,7 @@ LATEST UPDATES
         <div class="event-grid">
 
             {% assign latest_posts = site.posts
-                | sort: 'date'
+                | sort: "date"
                 | reverse
             %}
 
