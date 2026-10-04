@@ -61,114 +61,66 @@ BANNER
 
 {% if upcoming_item %}
 
-<section class="event-banner" aria-label="Important notice">
-
-    <a
-        href="{{ upcoming_item.url | relative_url }}"
-        class="event-banner-link"
-    >
-
-        <div class="event-banner-track">
-
-            <!-- First copy -->
-
-            <div class="event-banner-group">
-
-                <span class="event-banner-label">
-
-                    {% if upcoming_item.category == "Event" %}
-                        UPCOMING EVENT
-                    {% elsif upcoming_item.category == "Workshop" %}
-                        UPCOMING WORKSHOP
-                    {% elsif upcoming_item.category == "Announcement" %}
-                        IMPORTANT
-                    {% else %}
-                        UPDATE
-                    {% endif %}
-
-                </span>
+    {% if upcoming_item.category == "Event" %}
+        {% assign banner_label = "UPCOMING EVENT" %}
+    {% elsif upcoming_item.category == "Workshop" %}
+        {% assign banner_label = "UPCOMING WORKSHOP" %}
+    {% elsif upcoming_item.category == "Announcement" %}
+        {% assign banner_label = "IMPORTANT" %}
+    {% else %}
+        {% assign banner_label = "UPDATE" %}
+    {% endif %}
 
 
-                <span class="event-banner-separator">
-                    •
-                </span>
+    <section class="event-banner" aria-label="{{ banner_label }}">
 
+        <a
+            href="{{ upcoming_item.url | relative_url }}"
+            class="event-banner-link"
+        >
 
-                <span class="event-banner-title">
-                    {{ upcoming_item.title }}
-                </span>
+            <div class="event-banner-track">
 
+                {% for i in (1..4) %}
 
-                <span class="event-banner-separator">
-                    •
-                </span>
+                    <div
+                        class="event-banner-group"
+                        {% if i != 1 %}aria-hidden="true"{% endif %}
+                    >
 
+                        <span class="event-banner-label">
+                            {{ banner_label }}
+                        </span>
 
-                <span class="event-banner-date">
-                    {{ upcoming_item.upcoming_date | date: "%d %B %Y" }}
-                </span>
+                        <span class="event-banner-separator">
+                            •
+                        </span>
 
+                        <span class="event-banner-title">
+                            {{ upcoming_item.title }}
+                        </span>
 
-                <span class="event-banner-arrow">
-                    →
-                </span>
+                        <span class="event-banner-separator">
+                            •
+                        </span>
 
-            </div>
+                        <span class="event-banner-date">
+                            {{ upcoming_item.upcoming_date | date: "%d %B %Y" }}
+                        </span>
 
+                        <span class="event-banner-arrow">
+                            →
+                        </span>
 
-            <!-- Second copy for seamless scrolling -->
+                    </div>
 
-            <div
-                class="event-banner-group"
-                aria-hidden="true"
-            >
-
-                <span class="event-banner-label">
-
-                    {% if upcoming_item.category == "Event" %}
-                        UPCOMING EVENT
-                    {% elsif upcoming_item.category == "Workshop" %}
-                        UPCOMING WORKSHOP
-                    {% elsif upcoming_item.category == "Announcement" %}
-                        IMPORTANT
-                    {% else %}
-                        UPDATE
-                    {% endif %}
-
-                </span>
-
-
-                <span class="event-banner-separator">
-                    •
-                </span>
-
-
-                <span class="event-banner-title">
-                    {{ upcoming_item.title }}
-                </span>
-
-
-                <span class="event-banner-separator">
-                    •
-                </span>
-
-
-                <span class="event-banner-date">
-                    {{ upcoming_item.upcoming_date | date: "%d %B %Y" }}
-                </span>
-
-
-                <span class="event-banner-arrow">
-                    →
-                </span>
+                {% endfor %}
 
             </div>
 
-        </div>
+        </a>
 
-    </a>
-
-</section>
+    </section>
 
 {% endif %}
 

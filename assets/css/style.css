@@ -491,7 +491,7 @@ body.header-scrolled {
 }
 
 /* =========================================================
-   UPCOMING EVENT BANNER
+   UPCOMING / IMPORTANT BANNER
    ========================================================= */
 
 .event-banner {
@@ -515,7 +515,6 @@ body.header-scrolled {
     overflow: hidden;
 
     color: #ffffff;
-
     text-decoration: none;
 }
 
@@ -524,13 +523,14 @@ body.header-scrolled {
 
     width: max-content;
 
-    animation: event-banner-scroll 22s linear infinite;
+    /* Move exactly one of the four identical groups */
+    animation: event-banner-scroll 24s linear infinite;
 
     will-change: transform;
 }
 
 .event-banner-group {
-    flex-shrink: 0;
+    flex: 0 0 auto;
 
     display: flex;
     align-items: center;
@@ -591,6 +591,11 @@ body.header-scrolled {
     transform: translateX(4px);
 }
 
+
+/* =========================================================
+   CONTINUOUS SCROLL
+   ========================================================= */
+
 @keyframes event-banner-scroll {
 
     from {
@@ -598,18 +603,20 @@ body.header-scrolled {
     }
 
     to {
-        transform: translateX(-50%);
+        /*
+         * There are four identical groups.
+         * Moving by 25% moves exactly one group.
+         * The fourth group is then in the exact position
+         * where the first group started.
+         */
+        transform: translateX(-25%);
     }
 
 }
 
-.event-banner:hover .event-banner-track {
-    animation-play-state: paused;
-}
-
 
 /* =========================================================
-   UPCOMING EVENT BANNER - MOBILE
+   MOBILE
    ========================================================= */
 
 @media (max-width: 600px) {
