@@ -494,6 +494,10 @@ body.header-scrolled {
    UPCOMING / IMPORTANT BANNER
    ========================================================= */
 
+:root {
+    --event-banner-height: 40px;
+}
+
 .event-banner {
     position: fixed;
 
@@ -515,19 +519,11 @@ body.header-scrolled {
     transition: top 0.3s ease;
 }
 
-:root {
-    --event-banner-height: 38px;
-}
-
-.event-banner-spacer {
-    width: 100%;
-    height: var(--event-banner-height);
-}
-
 .event-banner-link {
     display: block;
 
     width: 100%;
+    height: 100%;
 
     overflow: hidden;
 
@@ -539,8 +535,8 @@ body.header-scrolled {
     display: flex;
 
     width: max-content;
+    height: 100%;
 
-    /* Move exactly one of the four identical groups */
     animation: event-banner-scroll 24s linear infinite;
 
     will-change: transform;
@@ -551,16 +547,21 @@ body.header-scrolled {
 
     display: flex;
     align-items: center;
+    justify-content: center;
 
     gap: 16px;
 
-    padding: 10px 32px;
+    height: 100%;
+    box-sizing: border-box;
+
+    padding: 0 32px;
 
     white-space: nowrap;
 
     font-size: 14px;
     font-weight: 600;
 
+    line-height: 1;
     letter-spacing: 0.3px;
 }
 
@@ -569,6 +570,7 @@ body.header-scrolled {
 
     font-weight: 800;
 
+    line-height: 1;
     letter-spacing: 1.2px;
 
     text-transform: uppercase;
@@ -577,40 +579,44 @@ body.header-scrolled {
 .event-banner-separator {
     opacity: 0.65;
 
-    font-size: 16px;
+    font-size: 15px;
+    line-height: 1;
 }
 
 .event-banner-title {
     font-weight: 700;
+    line-height: 1;
 }
 
 .event-banner-date {
     font-weight: 500;
 
     opacity: 0.9;
+
+    line-height: 1;
 }
 
 .event-banner-arrow {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
 
     font-size: 18px;
-
     line-height: 1;
-
-    transition: transform 0.2s ease;
-}
-
-.event-banner-link:hover {
-    color: #ffffff;
-}
-
-.event-banner-link:hover .event-banner-arrow {
-    transform: translateX(4px);
 }
 
 
 /* =========================================================
-   CONTINUOUS SCROLL
+   BANNER SPACER
+   ========================================================= */
+
+.event-banner-spacer {
+    width: 100%;
+    height: var(--event-banner-height);
+}
+
+
+/* =========================================================
+   SCROLLING ANIMATION
    ========================================================= */
 
 @keyframes event-banner-scroll {
@@ -620,12 +626,6 @@ body.header-scrolled {
     }
 
     to {
-        /*
-         * There are four identical groups.
-         * Moving by 25% moves exactly one group.
-         * The fourth group is then in the exact position
-         * where the first group started.
-         */
         transform: translateX(-25%);
     }
 
@@ -638,10 +638,14 @@ body.header-scrolled {
 
 @media (max-width: 600px) {
 
+    :root {
+        --event-banner-height: 36px;
+    }
+
     .event-banner-group {
         gap: 12px;
 
-        padding: 9px 24px;
+        padding: 0 24px;
 
         font-size: 13px;
     }
@@ -651,7 +655,7 @@ body.header-scrolled {
     }
 
     .event-banner-separator {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .event-banner-arrow {
