@@ -495,9 +495,15 @@ body.header-scrolled {
    ========================================================= */
 
 .event-banner {
-    position: relative;
+    position: fixed;
+
+    top: var(--header-height);
+    left: 0;
+
+    z-index: 900;
 
     width: 100%;
+    height: var(--event-banner-height);
 
     overflow: hidden;
 
@@ -505,6 +511,17 @@ body.header-scrolled {
     color: #ffffff;
 
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+    transition: top 0.3s ease;
+}
+
+:root {
+    --event-banner-height: 38px;
+}
+
+.event-banner-spacer {
+    width: 100%;
+    height: var(--event-banner-height);
 }
 
 .event-banner-link {

@@ -61,66 +61,90 @@ BANNER
 
 {% if upcoming_item %}
 
-    {% if upcoming_item.category == "Event" %}
-        {% assign banner_label = "UPCOMING EVENT" %}
-    {% elsif upcoming_item.category == "Workshop" %}
-        {% assign banner_label = "UPCOMING WORKSHOP" %}
-    {% elsif upcoming_item.category == "Announcement" %}
-        {% assign banner_label = "IMPORTANT" %}
-    {% else %}
-        {% assign banner_label = "UPDATE" %}
-    {% endif %}
+<section class="event-banner" aria-label="Important notice">
 
+    <a
+        href="{{ upcoming_item.url | relative_url }}"
+        class="event-banner-link"
+    >
 
-    <section class="event-banner" aria-label="{{ banner_label }}">
+        <div class="event-banner-track">
 
-        <a
-            href="{{ upcoming_item.url | relative_url }}"
-            class="event-banner-link"
-        >
+            {% for i in (1..4) %}
 
-            <div class="event-banner-track">
+                <div
+                    class="event-banner-group"
+                    {% if i != 1 %}aria-hidden="true"{% endif %}
+                >
 
-                {% for i in (1..4) %}
-
-                    <div
-                        class="event-banner-group"
-                        {% if i != 1 %}aria-hidden="true"{% endif %}
-                    >
+                    {% if upcoming_item.category == "Event" %}
 
                         <span class="event-banner-label">
-                            {{ banner_label }}
+                            UPCOMING EVENT
                         </span>
 
-                        <span class="event-banner-separator">
-                            •
+                    {% elsif upcoming_item.category == "Workshop" %}
+
+                        <span class="event-banner-label">
+                            UPCOMING WORKSHOP
                         </span>
 
-                        <span class="event-banner-title">
-                            {{ upcoming_item.title }}
+                    {% elsif upcoming_item.category == "Announcement" %}
+
+                        <span class="event-banner-label">
+                            IMPORTANT
                         </span>
 
-                        <span class="event-banner-separator">
-                            •
+                    {% else %}
+
+                        <span class="event-banner-label">
+                            UPDATE
                         </span>
 
-                        <span class="event-banner-date">
-                            {{ upcoming_item.upcoming_date | date: "%d %B %Y" }}
-                        </span>
+                    {% endif %}
 
-                        <span class="event-banner-arrow">
-                            →
-                        </span>
 
-                    </div>
+                    <span class="event-banner-separator">
+                        •
+                    </span>
 
-                {% endfor %}
 
-            </div>
+                    <span class="event-banner-title">
+                        {{ upcoming_item.title }}
+                    </span>
 
-        </a>
 
-    </section>
+                    <span class="event-banner-separator">
+                        •
+                    </span>
+
+
+                    <span class="event-banner-date">
+                        {{ upcoming_item.upcoming_date | date: "%d %B %Y" }}
+                    </span>
+
+
+                    <span class="event-banner-arrow">
+                        →
+                    </span>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </a>
+
+</section>
+
+
+<!-- Keeps page content below the fixed banner -->
+
+<div
+    class="event-banner-spacer"
+    aria-hidden="true"
+></div>
 
 {% endif %}
 
