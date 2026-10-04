@@ -490,6 +490,220 @@ body.header-scrolled {
     font-size: 12px;
 }
 
+/* =========================================================
+   UPCOMING EVENT BANNER
+   ========================================================= */
+
+.event-banner {
+    position: relative;
+    width: 100%;
+
+    overflow: hidden;
+
+    background: #005eb8;
+    color: #ffffff;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+
+/* -------------------------
+   Banner link
+   ------------------------- */
+
+.event-banner-link {
+    display: block;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    color: #ffffff;
+
+    text-decoration: none;
+}
+
+
+/* -------------------------
+   Scrolling track
+   ------------------------- */
+
+.event-banner-track {
+    display: flex;
+
+    width: max-content;
+
+    animation: event-banner-scroll 24s linear infinite;
+
+    will-change: transform;
+}
+
+
+/* -------------------------
+   Individual repeated group
+   ------------------------- */
+
+.event-banner-group {
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 10px 32px;
+
+    white-space: nowrap;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* -------------------------
+   "Upcoming Event" label
+   ------------------------- */
+
+.event-banner-label {
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    text-transform: uppercase;
+}
+
+
+/* -------------------------
+   Separator
+   ------------------------- */
+
+.event-banner-separator {
+    opacity: 0.65;
+
+    font-size: 16px;
+}
+
+
+/* -------------------------
+   Event title
+   ------------------------- */
+
+.event-banner-title {
+    font-weight: 700;
+}
+
+
+/* -------------------------
+   Date
+   ------------------------- */
+
+.event-banner-date {
+    font-weight: 500;
+
+    opacity: 0.9;
+}
+
+
+/* -------------------------
+   Arrow
+   ------------------------- */
+
+.event-banner-arrow {
+    display: inline-block;
+
+    font-size: 18px;
+
+    line-height: 1;
+
+    transition: transform 0.2s ease;
+}
+
+
+/* -------------------------
+   Hover
+   ------------------------- */
+
+.event-banner-link:hover {
+    color: #ffffff;
+}
+
+.event-banner-link:hover .event-banner-arrow {
+    transform: translateX(4px);
+}
+
+
+/* -------------------------
+   Scrolling animation
+   ------------------------- */
+
+@keyframes event-banner-scroll {
+
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+
+}
+
+
+/* -------------------------
+   Pause on hover
+   ------------------------- */
+
+.event-banner:hover .event-banner-track {
+    animation-play-state: paused;
+}
+
+
+/* =========================================================
+   UPCOMING EVENT BANNER - MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .event-banner-group {
+        gap: 12px;
+
+        padding: 9px 24px;
+
+        font-size: 13px;
+    }
+
+
+    .event-banner-label {
+        font-size: 10px;
+    }
+
+
+    .event-banner-separator {
+        font-size: 14px;
+    }
+
+
+    .event-banner-arrow {
+        font-size: 16px;
+    }
+
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .event-banner-track {
+        animation: none;
+    }
+
+}
 
 /* =========================================================
    HOME

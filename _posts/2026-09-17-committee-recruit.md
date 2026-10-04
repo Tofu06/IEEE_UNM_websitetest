@@ -3,6 +3,7 @@ layout: post
 title: "Junior Committee Registration Now Open"
 date: 2026-09-17 09:00:00 +0800
 category: Announcement
+upcoming: true
 image: /images/placeholder.svg
 ---
 
