@@ -12,4 +12,4 @@ The IEEE UNM Student Branch held a virtual career talk called the NXP Career Asp
 
 ## Event Photos
 
-![Group Photo](/images/migrated-events/2023-2024/nxp-career-aspiration-talk/nxp_career_aspiration_img1.png)
+![Group Photo]({{ '/images/migrated-events/2023-2024/nxp-career-aspiration-talk/nxp_career_aspiration_img1.png' | relative_url }})

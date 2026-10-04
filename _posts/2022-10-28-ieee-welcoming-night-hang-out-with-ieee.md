@@ -12,4 +12,4 @@ The IEEE UNM Student Branch hosted an unforgettable IEEE Hangout on 28th October
 
 ## Event Photos
 
-![Game Time!](/images/migrated-events/2022-2023/ieee-welcoming-night-hang-out-with-ieee/IEEE_hangout_img1.jpg)
+![Game Time!]({{ '/images/migrated-events/2022-2023/ieee-welcoming-night-hang-out-with-ieee/IEEE_hangout_img1.jpg' | relative_url }})

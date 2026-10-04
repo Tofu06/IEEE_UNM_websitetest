@@ -12,4 +12,4 @@ The IEEE UNM Student Branch held an insightful online EV-Charging Infrastructure
 
 ## Event Photos
 
-![Group Photo](/images/migrated-events/2023-2024/ev-charging-infrastructure-industrial-talk/evc_talk_img1.jpg)
+![Group Photo]({{ '/images/migrated-events/2023-2024/ev-charging-infrastructure-industrial-talk/evc_talk_img1.jpg' | relative_url }})

@@ -12,6 +12,6 @@ The IEEE UNM Student Branch held an enjoyable movie night on the 5th of April 20
 
 ## Event Photos
 
-![Event Poster](/images/migrated-events/2022-2023/ieee-movie-night-wall-e/movie-night-poster-2.png)
+![Event Poster]({{ '/images/migrated-events/2022-2023/ieee-movie-night-wall-e/movie-night-poster-2.png' | relative_url }})
 
-![Snacks for the Participants](/images/migrated-events/2022-2023/ieee-movie-night-wall-e/movie_night_img1.jpg)
+![Snacks for the Participants]({{ '/images/migrated-events/2022-2023/ieee-movie-night-wall-e/movie_night_img1.jpg' | relative_url }})

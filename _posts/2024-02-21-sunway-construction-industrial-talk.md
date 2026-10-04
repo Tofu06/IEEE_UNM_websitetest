@@ -12,4 +12,4 @@ The IEEE UNM Student Branch held a virtual industrial talk on the career opportu
 
 ## Event Photos
 
-![Group Photo](/images/migrated-events/2023-2024/sunway-construction-industrial-talk/SunCon_talk_img1.jpg)
+![Group Photo]({{ '/images/migrated-events/2023-2024/sunway-construction-industrial-talk/SunCon_talk_img1.jpg' | relative_url }})
