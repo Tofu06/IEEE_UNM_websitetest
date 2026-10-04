@@ -6,35 +6,45 @@ description: IEEE University of Nottingham Malaysia Student Branch.
 
 {%- comment -%}
 =========================================================
-UPCOMING EVENT
+UPCOMING / IMPORTANT BANNER
 =========================================================
 
-The banner looks for posts with:
+Posts can use:
 
     upcoming: true
+    upcoming_date: YYYY-MM-DD HH:MM:SS +0800
 
-It only considers Event and Workshop posts.
+Supported categories:
 
-The nearest future event will be displayed.
-If there is no upcoming event, the banner is hidden.
+    Event
+    Workshop
+    Announcement
+
+The banner displays the nearest future upcoming_date.
 =========================================================
 {%- endcomment -%}
 
 {% assign upcoming_posts = site.posts
     | where: "upcoming", true
-    | sort: "date"
+    | sort: "upcoming_date"
 %}
 
-{% assign upcoming_event = nil %}
+{% assign upcoming_item = nil %}
 
 {% for candidate in upcoming_posts %}
 
-    {% if candidate.date > site.time %}
+    {% if candidate.upcoming_date %}
 
-        {% if candidate.category == "Event" or candidate.category == "Workshop" %}
+        {% if candidate.upcoming_date > site.time %}
 
-            {% assign upcoming_event = candidate %}
-            {% break %}
+            {% if candidate.category == "Event"
+                or candidate.category == "Workshop"
+                or candidate.category == "Announcement" %}
+
+                {% assign upcoming_item = candidate %}
+                {% break %}
+
+            {% endif %}
 
         {% endif %}
 
@@ -45,43 +55,59 @@ If there is no upcoming event, the banner is hidden.
 
 {%- comment -%}
 =========================================================
-UPCOMING EVENT BANNER
+BANNER
 =========================================================
 {%- endcomment -%}
 
-{% if upcoming_event %}
+{% if upcoming_item %}
 
-<section class="event-banner" aria-label="Upcoming event">
+<section class="event-banner" aria-label="Important notice">
 
     <a
-        href="{{ upcoming_event.url | relative_url }}"
+        href="{{ upcoming_item.url | relative_url }}"
         class="event-banner-link"
     >
 
         <div class="event-banner-track">
 
             <!-- First copy -->
+
             <div class="event-banner-group">
 
                 <span class="event-banner-label">
-                    UPCOMING EVENT
+
+                    {% if upcoming_item.category == "Event" %}
+                        UPCOMING EVENT
+                    {% elsif upcoming_item.category == "Workshop" %}
+                        UPCOMING WORKSHOP
+                    {% elsif upcoming_item.category == "Announcement" %}
+                        IMPORTANT
+                    {% else %}
+                        UPDATE
+                    {% endif %}
+
                 </span>
+
 
                 <span class="event-banner-separator">
                     •
                 </span>
+
 
                 <span class="event-banner-title">
-                    {{ upcoming_event.title }}
+                    {{ upcoming_item.title }}
                 </span>
+
 
                 <span class="event-banner-separator">
                     •
                 </span>
 
+
                 <span class="event-banner-date">
-                    {{ upcoming_event.date | date: "%d %B %Y" }}
+                    {{ upcoming_item.upcoming_date | date: "%d %B %Y" }}
                 </span>
+
 
                 <span class="event-banner-arrow">
                     →
@@ -90,31 +116,47 @@ UPCOMING EVENT BANNER
             </div>
 
 
-            <!-- Second copy -->
+            <!-- Second copy for seamless scrolling -->
+
             <div
                 class="event-banner-group"
                 aria-hidden="true"
             >
 
                 <span class="event-banner-label">
-                    UPCOMING EVENT
+
+                    {% if upcoming_item.category == "Event" %}
+                        UPCOMING EVENT
+                    {% elsif upcoming_item.category == "Workshop" %}
+                        UPCOMING WORKSHOP
+                    {% elsif upcoming_item.category == "Announcement" %}
+                        IMPORTANT
+                    {% else %}
+                        UPDATE
+                    {% endif %}
+
                 </span>
+
 
                 <span class="event-banner-separator">
                     •
                 </span>
+
 
                 <span class="event-banner-title">
-                    {{ upcoming_event.title }}
+                    {{ upcoming_item.title }}
                 </span>
+
 
                 <span class="event-banner-separator">
                     •
                 </span>
 
+
                 <span class="event-banner-date">
-                    {{ upcoming_event.date | date: "%d %B %Y" }}
+                    {{ upcoming_item.upcoming_date | date: "%d %B %Y" }}
                 </span>
+
 
                 <span class="event-banner-arrow">
                     →
